@@ -17,9 +17,6 @@ exports.create = (req, res) => {
     isComplete: req.body.isComplete ? req.body.published : false,
     assignedTo: req.body.assignedTo,
     priority: req.body.priority
-
-
-
   });
 
   // Save Tutorial in the database
