@@ -15,6 +15,9 @@ module.exports = app => {
   // Retrieve a single Tutorial with id
   router.get("/:id", tutorials.findOne);
 
+  router.get("/todo/:email",tutorials.findOne2)
+
+
   // Update a Tutorial with id
   router.put("/:id", tutorials.update);
 

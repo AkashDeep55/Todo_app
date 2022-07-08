@@ -14,7 +14,7 @@ exports.create = (req, res) => {
     title: req.body.title,
     description: req.body.description,
     published: req.body.published ? req.body.published : false,
-    isComplete: req.body.isComplete ? req.body.published : false,
+    isComplete: req.body.isComplete ? req.body.isComplete : false,
     assignedTo: req.body.assignedTo,
     priority: req.body.priority
   });
@@ -57,13 +57,13 @@ exports.findOne = (req, res) => {
   Tutorial.findById(id)
     .then(data => {
       if (!data)
-        res.status(404).send({ message: "Not found Tutorial with id " + id });
+        res.status(404).send({ message: "Not found Tutorial with id " });
       else res.send(data);
     })
     .catch(err => {
       res
         .status(500)
-        .send({ message: "Error retrieving Tutorial with id=" + id });
+        .send({ message: "Error retrieving Tutorial with id=" + err });
     });
 };
 
@@ -91,6 +91,25 @@ exports.update = (req, res) => {
       });
     });
 };
+
+//find todo list by emailid
+
+exports.findOne2 = (req, res) => {
+  const email = req.params.email;
+
+  User.find().populate({path:'User',select:'email'})
+    .then(data => {
+      if (!data)
+        res.status(404).send({ message: "Not found Tutorial with id " + email });
+      else res.send(data);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .send({ message: "Error retrieving Tutorial with id=" + email });
+    });
+};
+
 
 // Delete a Tutorial with the specified id in the request
 exports.delete = (req, res) => {
